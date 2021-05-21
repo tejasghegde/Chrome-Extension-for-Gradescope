@@ -1,26 +1,28 @@
 {
-    "name": "Gradescope Grade Calculator",
-    "description": "Calculates your average score(s)",
+    "name": "Gradescope Calculator",
     "version": "1.0",
-    "manifest_version": 3,
-    "background": {
-        "service_worker": "background.js"
-      },
-      "permissions": ["storage", "activeTab", "scripting", "tabs"],
-    "action": {
-        "default_popup": "popup.html",
-        "default_icon": {
-            "16": "/images/Gradescope Logo16.png",
-            "32": "/images/Gradescope Logo32.png",
-            "48": "/images/Gradescope Logo48.png",
-            "128": "/images/Gradescope Logo128.png"
-          }
-      },
-      "icons": {
-            "16": "/images/Gradescope Logo16.png",
-            "32": "/images/Gradescope Logo32.png",
-            "48": "/images/Gradescope Logo48.png",
-            "128": "/images/Gradescope Logo128.png"
+    "manifest_version": 2,
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
       }
-
-}
+    ],
+    "browser_action": {
+      "default_popup": "popup.html",
+      "default_title": "Gradescope Calculator",
+      "default_icon": {
+        "16": "/images/Gradescope Logo16.png",
+        "32": "/images/Gradescope Logo32.png",
+        "48": "/images/Gradescope Logo48.png",
+        "128": "/images/Gradescope Logo128.png"
+      }
+    },
+    "permissions": ["tabs"],
+    "icons" : {
+        "16": "/images/Gradescope Logo16.png",
+        "32": "/images/Gradescope Logo32.png",
+        "48": "/images/Gradescope Logo48.png",
+        "128": "/images/Gradescope Logo128.png"
+      }
+  }

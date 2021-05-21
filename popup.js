@@ -1,27 +1,19 @@
-// Initialize button with user's preferred color
-let changeColor = document.getElementById("changeColor");
-
-chrome.storage.sync.get("color", ({ color }) => {
-  changeColor.style.backgroundColor = color;
-});
-
-// When the button is clicked, inject setPageBackgroundColor into current page
-changeColor.addEventListener("click", async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelector('button').addEventListener('click', onclick, false)
   
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: setPageBackgroundColor,
-    });
-  });
-  
-  // The body of this function will be executed as a content script inside the
-  // current page
-  function setPageBackgroundColor() {
-    chrome.storage.sync.get("color", ({ color }) => {
-      document.body.style.backgroundColor = color;
-    });
+  function onclick () {
+    chrome.tabs.query({currentWindow: true, active: true}, function (tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, 'hi', setCount)
+    })
   }
+  
+  function setCount (res) {
+    const div = document.createElement('div')
+    div.textContent = `${res.count} bears`
+    document.body.appendChild(div)
+  }
+}, false)
 
 // code found at https://stackoverflow.com/questions/11684454/getting-the-source-html-of-the-current-page-from-chrome-extension
+
 
