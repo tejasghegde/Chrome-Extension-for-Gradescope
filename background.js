@@ -1,6 +1,6 @@
 chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.local.set({
-        name: "Jack"
+        name: "0%"
     });
 });
 

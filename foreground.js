@@ -8,8 +8,8 @@ ce_name.id = "ce_name";
 ce_input.id = "ce_input";
 ce_button.id = "ce_button";
 
-ce_name.innerHTML = `Hello NAME`;
-ce_button.innerHTML = `Change name`;
+ce_name.innerHTML = `Percentage: NAME`;
+ce_button.innerHTML = `Calculate Score`;
 
 ce_main_container.appendChild(ce_name);
 ce_main_container.appendChild(ce_input);
@@ -21,7 +21,7 @@ chrome.runtime.sendMessage({
     message: "get_name"
 }, response => {
     if (response.message == "success") {
-        ce_name.innerHTML = `Hello ${response.payload}`
+        ce_name.innerHTML = `Percentage: ${response.payload}`
     }
 }); 
 
@@ -31,7 +31,26 @@ ce_button.addEventListener("click", () => {
         payload: ce_input.value
     }, response => {
         if (response.message === "success") {
-            ce_name.innerHTML = `Hello ${ce_input.value}`
+            var x = document.getElementsByClassName("submissionStatus--score");
+            var y = [];
+            var i;
+            for (i = 0; i < x.length; i++) {
+                y.push((x[i].innerHTML));
+            }
+            
+            var numerator = 0;
+            var denominator = 0;
+            var j;
+            for (j = 0; j < x.length; j++) {
+                var fraction = y[j].split(" ");
+                numerator += Number(fraction[0]);
+                denominator += Number(fraction[2]);
+            }
+            var answer = numerator/denominator;
+            var rounded = Math.round(answer * 10000)/100;
+            var final = rounded.toString() + "%";
+            ce_name.innerHTML = `Percentage: ${final}`  // ${ce_input.value}
+            console.log(res)
         }
     });
 });

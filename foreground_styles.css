@@ -1,28 +1,28 @@
 .ce_main {
-    width: 400px;
-    height: 600px;
+    width: 230px;
+    height: 88px;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 50%;
+    top: 15.5%;
     left: 50%;
     transform: translate(-50%, -50%);
 
     color: white;
-    background-color: red;
+    background-color: darkcyan;
 }
 
 #ce_name {
-    font-size: 70px;
+    font-size: 25px;
 }
 
 #ce_button {
-    padding: 60px 30px;
+    padding: 10px 10px;
 
-    border-radius: 5px;
+    border-radius: 4px;
 
     background-color: black;
 
