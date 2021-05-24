@@ -35,22 +35,48 @@ ce_button.addEventListener("click", () => {
             var y = [];
             var i;
             for (i = 0; i < x.length; i++) {
-                y.push((x[i].innerHTML));
+                y.push(x[i].innerHTML);
             }
-            
+
+            // code for parsing page based on user's input.
+
+            var list = document.getElementsByTagName("a");
+            var list_2 = []
+            var f;
+            for (f = 0; f < list.length; f++) {
+                list_2.push(list[f].innerHTML)
+            }
+            list_2.splice(0,13);
+            var q;
+            for (q = 0; q < 3; q++) {
+                list_2.pop();
+            }
+            var targets = [];
+            var k;
+            for (k = 0; k < list_2.length; k++) {
+                if (list_2[k].includes(ce_input.value) === true) {
+                    targets.push(k);
+                } else if (ce_input.value == "Homework") {
+                        if (list_2[k].includes("HW")) {
+                            targets.push(k);
+                        }
+                }
+            }
+
             var numerator = 0;
             var denominator = 0;
             var j;
-            for (j = 0; j < x.length; j++) {
-                var fraction = y[j].split(" ");
+            for (j = 0; j < targets.length; j++) {
+                var fraction = y[targets[j]].split(" ");
                 numerator += Number(fraction[0]);
                 denominator += Number(fraction[2]);
             }
             var answer = numerator/denominator;
-            var rounded = Math.round(answer * 10000)/100;
-            var final = rounded.toString() + "%";
-            ce_name.innerHTML = `Percentage: ${final}`  // ${ce_input.value}
-            console.log(res)
+            answer = Math.round(answer * 10000)/100;
+            answer = answer.toString() + "%";
+            
+
+            ce_name.innerHTML = `Percentage: ${answer}`  //${final}, ${ce_input.value}
         }
     });
 });
