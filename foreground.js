@@ -43,13 +43,24 @@ ce_button.addEventListener("click", () => {
             var tejas = [];
             for (var i = 0; i < row.length; i++) {
                 var y = row[i].innerHTML.split("Submitted");
-                if (y === row[i].innerHTML) {
-                    var row1 = document.getElementsByClassName("submissionStatus--score");
+                var row0 =  y[0]
+                var row6 = row0.split("score\">")
+                var row7 = row6[1]
+                var row8 = row7.split("\"")
+                var row9 = row8[0]   // this is the score. Ex: 1.0 / 1.0
+                
+
+                ce_name.innerHTML = `Percentage: ${row9}`
+                if (!(row[i].innerHTML.includes("Submitted"))) {
+                    var row1 = row[i].innerHTML.split("/");
+                    var last_element = 0;
+                    //var  row2 = row1[1].push(row1[0][row1.length -  1]);
+
                 }
             }
             //Proficiency Check 1A: Variable Attributes (Final Try)
             //Submitted
-            ce_name.innerHTML = `Percentage: ${row[0]}`
+            
 
             // code for parsing page based on user's input.
 
