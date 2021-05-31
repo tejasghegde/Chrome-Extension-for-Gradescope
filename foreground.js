@@ -32,64 +32,86 @@ ce_button.addEventListener("click", () => {
         payload: ce_input.value
     }, response => {
         if (response.message === "success") {
-            var x = document.getElementsByClassName("submissionStatus--score");
-            var score_list = [];
-            var i;
-            for (i = 0; i < x.length; i++) {
-                score_list.push(x[i].innerHTML);
-            }
+            // var x = document.getElementsByClassName("submissionStatus--score");
+            // var score_list = [];
+            // var i;
+            // for (i = 0; i < x.length; i++) {
+            //     score_list.push(x[i].innerHTML);
+            // }
 
-            var row = document.getElementsByClassName("odd");
-            var tejas = [];
-            for (var i = 0; i < row.length; i++) {
-                var y = row[i].innerHTML.split("Submitted");
-                var row0 =  y[0]
-                var row6 = row0.split("score\">")
-                var row7 = row6[1]
-                var row8 = row7.split("\"")
-                var row9 = row8[0]   // this is the score. Ex: 1.0 / 1.0
-                
-
-                ce_name.innerHTML = `Percentage: ${row9}`
-                if (!(row[i].innerHTML.includes("Submitted"))) {
-                    var row1 = row[i].innerHTML.split("/");
-                    var last_element = 0;
-                    //var  row2 = row1[1].push(row1[0][row1.length -  1]);
-
+            var row1 = document.getElementsByClassName("odd");   // querySelectorAll('[role="row"]')
+            var score1 = [];
+            for (var i = 0; i < row1.length; i++) {
+                if (!(row1[i].innerHTML.includes("Submitted")) && 
+                !(row1[i].innerHTML.includes("No Submission"))) {
+                    var y1 = row1[i].innerHTML;
+                    var a1 = y1.split("score\">");
+                    var b1 = a1[1];
+                    var c1 = b1.split("</div");
+                    var d1 = c1[0];  // this is the score. Ex: 1.0 / 1.0
+                    score1.push(d1);
+                } else {
+                    score1.push("None");
                 }
             }
-            //Proficiency Check 1A: Variable Attributes (Final Try)
-            //Submitted
-            
+
+            var row2 = document.getElementsByClassName("even");   // querySelectorAll('[role="row"]')
+            var score2 = [];
+            for (var i = 0; i < row2.length; i++) {
+                if (!(row2[i].innerHTML.includes("Submitted"))) {
+                    var y2 = row2[i].innerHTML;
+                    var a2 = y2.split("score\">");
+                    var b2 = a2[1];
+                    var c2 = b2.split("</div");
+                    var d2 = c2[0];  // this is the score. Ex: 1.0 / 1.0
+                    score2.push(d2);
+                } else {
+                    score2.push("None");
+                }
+            }
+            var score_list = [];
+            for (var i = 0; i < row1.length + row2.length; i++) {
+                if (i%2 == 0) {
+                    score_list.push(score1.shift());
+                } else {
+                    score_list.push(score2.shift());
+                }
+            }            
 
             // code for parsing page based on user's input.
 
-            // var name_list = document.getElementsByClassName("table--primaryLink");
-            // var new_list = [];
-            // for (var j = 0; j < name_list.length; j++){
-            //     if(typeof score_list[j] !== 'undefined')
-            //         new_list.push([name_list[j],score_list[j]]) // push an array with [name, score]
-            // }
-            
-            // var targets = [];
-            // for (var i = 0; i < new_list.length; i++){
-            //     if (new_list[i][0].innerHTML.includes(ce_input.value)){
-            //         if (typeof new_list[i][1] !== 'undefined'){
-            //             targets.push(new_list[i][1])
-            //         }
-            //     }
-            // }
-            // var numerator = 0;
-            // var denominator = 0;
-            // for (var j = 0; j < targets.length; j++) {
-            //     var fraction = targets[j].split(" ");
-            //     numerator += Number(fraction[0]);
-            //     denominator += Number(fraction[2]);
-            // }
-            // var answer = numerator/denominator;
-            // answer = Math.round(answer * 10000)/100;
-            // answer = answer.toString() + "%";
-            // ce_name.innerHTML = `Percentage: ${targets}`
+            var name_list = document.getElementsByClassName("table--primaryLink");
+            var new_list = [];
+            for (var j = 0; j < name_list.length; j++){
+                new_list.push(name_list[j].children[0].innerHTML); // push the name
+            }
+
+            var targets = [];
+            for (var i = 0; i < new_list.length; i++) {
+                if (new_list[i].includes(ce_input.value) === true) {
+                    targets.push(i);
+                } else if (ce_input.value == "Homework") {
+                        if (new_list[i].includes("HW")) {
+                            targets.push(i);
+                        }
+                }
+            }
+
+            var numerator = 0;
+            var denominator = 0;
+            for (var i = 0; i < targets.length; i++) {
+                if (score_list[targets[i]] != "None") {
+                    var fraction = score_list[targets[i]].split(" ");
+                numerator += Number(fraction[0]);
+                denominator += Number(fraction[2]);
+                }
+            }
+
+            var answer = numerator/denominator;
+            answer = Math.round(answer * 10000)/100;
+            answer = answer.toString() + "%";
+
+            ce_name.innerHTML = `Percentage: ${answer}`;
         }
     });
 });
