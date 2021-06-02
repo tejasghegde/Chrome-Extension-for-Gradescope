@@ -4,7 +4,13 @@
   "version" :"1.0",
   "manifest_version": 3,
   "action" : {
-      "default_popup" : "./popup.html"   
+    "default_icon": {
+        "16": "/images/Gradescope Logo16.png",
+        "32": "/images/Gradescope Logo32.png",
+        "48": "/images/Gradescope Logo48.png",
+        "128": "/images/Gradescope Logo128.png"
+      },
+      "default_title": "Click to open the calculator"
   },
   "background": {
       "service_worker": "./background.js"
