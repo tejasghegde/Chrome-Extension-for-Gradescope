@@ -42,8 +42,9 @@ ce_button.addEventListener("click", () => {
             var row1 = document.getElementsByClassName("odd");   // querySelectorAll('[role="row"]')
             var score1 = [];
             for (var i = 0; i < row1.length; i++) {
-                if (!(row1[i].innerHTML.includes("Submitted")) && 
-                !(row1[i].innerHTML.includes("No Submission"))) {
+                if (!(row1[i].innerHTML.includes("Submitted")) &&
+                !(row1[i].innerHTML.includes("No Submission")) &&
+                !(row1[i].innerHTML.includes("Ungraded"))) {
                     var y1 = row1[i].innerHTML;
                     var a1 = y1.split("score\">");
                     var b1 = a1[1];
@@ -58,7 +59,9 @@ ce_button.addEventListener("click", () => {
             var row2 = document.getElementsByClassName("even");   // querySelectorAll('[role="row"]')
             var score2 = [];
             for (var i = 0; i < row2.length; i++) {
-                if (!(row2[i].innerHTML.includes("Submitted"))) {
+                if (!(row2[i].innerHTML.includes("Submitted")) &&
+                !(row2[i].innerHTML.includes("No Submission")) &&
+                !(row2[i].innerHTML.includes("Ungraded"))) {
                     var y2 = row2[i].innerHTML;
                     var a2 = y2.split("score\">");
                     var b2 = a2[1];
@@ -83,17 +86,20 @@ ce_button.addEventListener("click", () => {
             var name_list = document.getElementsByClassName("table--primaryLink");
             var new_list = [];
             for (var j = 0; j < name_list.length; j++){
-                new_list.push(name_list[j].children[0].innerHTML); // push the name
+                if (name_list[j].children[0] != undefined) {
+                    new_list.push(name_list[j].children[0].innerHTML); // push the name
+                } else {
+                    new_list.push("None")
+                }
             }
 
             var targets = [];
             for (var i = 0; i < new_list.length; i++) {
                 if (new_list[i].includes(ce_input.value) === true) {
                     targets.push(i);
-                } else if (ce_input.value == "Homework") {
-                        if (new_list[i].includes("HW")) {
+                } else if (ce_input.value == "Homework" && 
+                new_list[i].includes("HW")) {
                             targets.push(i);
-                        }
                 }
             }
 
