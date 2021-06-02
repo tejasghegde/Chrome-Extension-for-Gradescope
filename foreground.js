@@ -32,13 +32,6 @@ ce_button.addEventListener("click", () => {
         payload: ce_input.value
     }, response => {
         if (response.message === "success") {
-            // var x = document.getElementsByClassName("submissionStatus--score");
-            // var score_list = [];
-            // var i;
-            // for (i = 0; i < x.length; i++) {
-            //     score_list.push(x[i].innerHTML);
-            // }
-
             var row1 = document.getElementsByClassName("odd");   // querySelectorAll('[role="row"]')
             var score1 = [];
             for (var i = 0; i < row1.length; i++) {
@@ -121,10 +114,3 @@ ce_button.addEventListener("click", () => {
         }
     });
 });
-
-
-// chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-//     if (request.message === "change_name") {
-//         ce_name.innerHTML = `Hello ${request.payload}`;
-//     }
-// });
