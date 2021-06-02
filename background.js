@@ -6,29 +6,49 @@ chrome.runtime.onInstalled.addListener(() => {
 
 
 
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, 
-    tab) => {
-        if (changeInfo.status == "complete" && /^http/.test(tab.url)) {
+// chrome.tabs.onUpdated.addListener((tabId, changeInfo, 
+//     tab) => {
+//         if (changeInfo.status == "complete" && /^http/.test(tab.url)) {
+//             chrome.scripting.insertCSS({
+//                 target: { tabId: tabId},
+//                 files: ["./button_styles.css"]   // ./foreground_styles
+//             })
+//                 .then(() => {
+//                     chrome.scripting.executeScript({
+//                         target: { tabId: tabId},
+//                         files: ["button_script.js"]   // ./foreground
+//                     })
+//                         .then(() => {
+//                             console.log("Injected button script")
+
+//                             // chrome.tabs.sendMessage(tabId, {
+//                             //     message: "change_name",
+//                             //     payload: "John"
+//                             // })
+//                         });
+//                 })
+//                 .catch(err => console.log(err));
+//         }
+// });
+
+chrome.action.onClicked.addListener((tabId) => {
+        console.log(tabId);
+        // if (changeInfo.status == "complete" && /^http/.test(tab.url)) {
             chrome.scripting.insertCSS({
-                target: { tabId: tabId},
-                files: ["./foreground_styles.css"]
+                target: {tabId: tabId},
+                files: ["button_styles.css"]   // ./foreground_styles
             })
                 .then(() => {
                     chrome.scripting.executeScript({
-                        target: { tabId: tabId},
-                        files: ["./foreground.js"]
+                        target: {tabId: tabId},
+                        files: ["button_script.js"]   // ./foreground
                     })
                         .then(() => {
-                            console.log("Injected foreground script")
-
-                            // chrome.tabs.sendMessage(tabId, {
-                            //     message: "change_name",
-                            //     payload: "John"
-                            // })
+                            console.log("Injected foreground script");
                         });
                 })
                 .catch(err => console.log(err));
-        }
+        // }
 });
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
