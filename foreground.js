@@ -3,19 +3,55 @@ const ce_name = document.createElement("DIV");
 const ce_input = document.createElement("INPUT");
 const ce_button = document.createElement("DIV");
 
+const ce_span = document.createElement("DIV");
+const ce_name2 = document.createElement("DIV");
+const ce_value = document.createElement("DIV");
+
+const ce_toggle = document.createElement("DIV");
+const ce_button2 = document.createElement("INPUT");
+const ce_button3 = document.createElement("INPUT");
+
+
 ce_main_container.classList.add("ce_main");
 ce_name.id = "ce_name";
 ce_input.id = "ce_input";
 ce_button.id = "ce_button";
 
+ce_span.classList.add("output_area");
+ce_name2.id = "ce_name2";
+ce_value.id = "ce_value";
+
+ce_toggle.classList.add("toggler")
+ce_button2.id = "ce_button2";
+ce_button2.value = "+";
+ce_button2.type = "button";
+ce_button3.id = "ce_button3";
+ce_button3.value = "–";
+ce_button3.type = "button";
+
+
 ce_name.innerHTML = `Percentage: NAME`;
 ce_button.innerHTML = `Calculate Score`;
+
+var x = 0;
+
+ce_name2.innerHTML = `Drops`
+ce_value.innerHTML = x;
 
 ce_main_container.appendChild(ce_name);
 ce_main_container.appendChild(ce_input);
 ce_main_container.appendChild(ce_button);
 
+ce_span.appendChild(ce_name2);
+ce_span.appendChild(ce_value);
+
+ce_toggle.appendChild(ce_button2);
+ce_toggle.appendChild(ce_button3);
+
+
 document.querySelector("body").appendChild(ce_main_container);
+document.querySelector("body").appendChild(ce_span);
+document.querySelector("body").appendChild(ce_toggle);
 
 if(typeof chrome.app.isInstalled!=='undefined'){
     chrome.runtime.sendMessage({
@@ -26,6 +62,24 @@ if(typeof chrome.app.isInstalled!=='undefined'){
         }
     }); 
 }
+
+if(document.getElementById("ce_button") !== null) {
+    chrome.runtime.sendMessage({
+        message: "remove"
+    }); 
+    console.log("hit");
+}
+
+ce_button2.addEventListener("click", () => {
+    x++
+    ce_value.innerHTML = `${x}`;
+})
+
+ce_button3.addEventListener("click", () => {
+    x--;
+    ce_value.innerHTML = `${x}`;
+})
+
 ce_button.addEventListener("click", () => {
     chrome.runtime.sendMessage({
         message: "change_name",
@@ -44,8 +98,10 @@ ce_button.addEventListener("click", () => {
                     var c1 = b1.split("</div");
                     var d1 = c1[0];  // this is the score. Ex: 1.0 / 1.0
                     score1.push(d1);
+                } else if (row1[i].innerHTML.includes("No Submission")) {
+                    score1.push("None")
                 } else {
-                    score1.push("None");
+                    score1.push("Not yet");
                 }
             }
 
@@ -61,8 +117,10 @@ ce_button.addEventListener("click", () => {
                     var c2 = b2.split("</div");
                     var d2 = c2[0];  // this is the score. Ex: 1.0 / 1.0
                     score2.push(d2);
-                } else {
+                } else if (row2[i].innerHTML.includes("No Submission")){
                     score2.push("None");
+                } else {
+                    score2.push("Not yet");
                 }
             }
             var score_list = [];
@@ -96,23 +154,53 @@ ce_button.addEventListener("click", () => {
                 }
             }
 
+            var percentage_list = [];
+            for (var i = 0; i < targets.length; i++) {
+                if (score_list[targets[i]] != "Not yet") {
+                    if (score_list[targets[i]] != "None") {
+                        var fraction = score_list[targets[i]].split(" ");
+                        var numerator2 = Number(fraction[0]);
+                        var denominator2 = Number(fraction[2]);
+                        percentage_list.push([(numerator2 / denominator2), targets[i]])
+                    } else {
+                        percentage_list.push([0.0, targets[i]]);
+                    }
+                }
+            }
+
+            if (x >= 1) {
+                for (var i = 0; i < x; i++) {
+                    for (j = 0; j < percentage_list.length - 1; j++) {
+                        if (percentage_list[j][0] < percentage_list[j + 1][0]) {
+                            var tmp = percentage_list[j];
+                            percentage_list[j] = percentage_list[j + 1];
+                            percentage_list[j + 1] = tmp;
+                        }   
+                    }
+                    percentage_list.pop();
+                }
+            }
+            
+            var new_targets = [];
+            for (var i = 0; i < percentage_list.length; i++) {
+                new_targets.push(percentage_list[i][1]);
+            }
+
             var numerator = 0;
             var denominator = 0;
-            for (var i = 0; i < targets.length; i++) {
-                if (score_list[targets[i]] != "None") {
-                    var fraction = score_list[targets[i]].split(" ");
-                numerator += Number(fraction[0]);
-                denominator += Number(fraction[2]);
+            for (var i = 0; i < new_targets.length; i++) {
+                if (score_list[new_targets[i]] != "None" && 
+                        score_list[new_targets[i]] != "Not yet") {
+                    var fraction = score_list[new_targets[i]].split(" ");
+                    numerator += Number(fraction[0]);
+                    denominator += Number(fraction[2]);
                 }
             }
 
             var answer = numerator/denominator;
             answer = Math.round(answer * 10000)/100;
             answer = answer.toString() + "%";
-
             ce_name.innerHTML = `Percentage: ${answer}`;
         }
     });
 });
-
-
