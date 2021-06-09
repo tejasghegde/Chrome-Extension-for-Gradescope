@@ -1,7 +1,7 @@
 {
   "name": "Gradescope Calculator",
   "description": "Calculates your score on Gradescope",
-  "version" :"1.0",
+  "version" :"1.0.0",
   "manifest_version": 3,
   "action" : {
     "default_icon": {
