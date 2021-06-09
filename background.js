@@ -5,28 +5,25 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 chrome.action.onClicked.addListener((tabId) => {
-        // if (document.getElementById("ce_name") == undefined) {
-            chrome.scripting.executeScript({
-                target: {tabId: tabId.id},
-                files: ["./foreground.js"],
-            })
-                .then(() => {
-                    chrome.scripting.insertCSS({
-                        target: {tabId: tabId.id},
-                        files: ["./foreground_styles.css"],   // ./foreground_styles
-                    })
-                        .then(() => {
-                            console.log("Injected foreground script");
-                        });
+        chrome.scripting.executeScript({
+            target: {tabId: tabId.id},
+            files: ["foreground.js"],
+        })
+        chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+            if (request.message === "remove") {
+                console.log("rajendra singh");
+                chrome.scripting.removeCSS({
+                    target: {tabId: tabId.id},
+                    files: ["foreground_styles.css"]
                 })
-                .catch(err => console.log(err));
-        // }
-        // else {
-        //     chrome.scripting.removeCSS({
-        //         target: {tabId: tabId.id},
-        //         files: ["./foreground_styles.css"]
-        //     })
-        // }
+                console.log("done");
+            } else {
+                chrome.scripting.insertCSS({
+                    target: {tabId: tabId.id},
+                    files: ["foreground_styles.css"],
+                })
+            }
+        })
 });
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
@@ -53,7 +50,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 sendResponse({ message: "fail"});
                 return;
             }
-
             sendResponse({message: "success"});
         })
 
