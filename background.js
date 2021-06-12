@@ -10,18 +10,18 @@ chrome.action.onClicked.addListener((tabId) => {
             files: ["foreground.js"],
         })
         chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-            if (request.message === "remove") {
-                console.log("rajendra singh");
-                chrome.scripting.removeCSS({
+            if (request.message !== "remove") {
+                chrome.scripting.insertCSS({
                     target: {tabId: tabId.id},
                     files: ["foreground_styles.css"]
                 })
-                console.log("done");
-            } else {
-                chrome.scripting.insertCSS({
+            } else if (request.message === "remove"){
+                console.log("target hit");
+                chrome.scripting.removeCSS({
                     target: {tabId: tabId.id},
                     files: ["foreground_styles.css"],
                 })
+                console.log("done");
             }
         })
 });

@@ -133,8 +133,8 @@
     border-radius: 4px;
 }
 
-.table1 {
-    width: 100px;
+.category {
+    width: 160px;
     height: 30px;
     display: flex;
     flex-direction: row;
@@ -142,8 +142,30 @@
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 13%;
-    left: 25%;
+    top: 11%;
+    left: 22%;
+    transform: translate(-50%, -50%);
+    background-color: darkcyan;
+    color: white;
+    border-radius: 4px;
+}
+
+#ce_category_name {
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+}
+
+.table1 {
+    width: 75px;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    z-index: 999999;
+    top: 17%;
+    left: 17%;
     transform: translate(-50%, -50%);
     background-color: darkcyan;
     color: white;
@@ -153,10 +175,11 @@
 #ce_table1_name {
     font-size: 12px;
     font-family: Arial, sans-serif;
+    text-align: center;
 }
 
-.table2 {
-    width: 100px;
+.table1_2 {
+    width: 30px;
     height: 30px;
     display: flex;
     flex-direction: row;
@@ -164,8 +187,52 @@
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 19%;
+    top: 17%;
     left: 25%;
+    transform: translate(-50%, -50%);
+    background-color: darkcyan;
+    color: white;
+    border-radius: 4px;
+}
+
+#ce_table1_2_name {
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+}
+
+.table1_3 {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    z-index: 999999;
+    top: 17%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    background-color: darkcyan;
+    color: white;
+    border-radius: 4px;
+}
+
+#ce_table1_3_name {
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+}
+
+.table2 {
+    width: 160px;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    z-index: 999999;
+    top: 23%;
+    left: 22%;
     transform: translate(-50%, -50%);
     background-color: darkcyan;
     color: white;
@@ -178,7 +245,7 @@
 }
 
 .table3{
-    width: 100px;
+    width: 160px;
     height: 30px;
     display: flex;
     flex-direction: row;
@@ -186,8 +253,8 @@
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 25%;
-    left: 25%;
+    top: 29%;
+    left: 22%;
     transform: translate(-50%, -50%);
     background-color: darkcyan;
     color: white;
@@ -200,7 +267,7 @@
 }
 
 .table4 {
-    width: 100px;
+    width: 160px;
     height: 30px;
     display: flex;
     flex-direction: row;
@@ -208,8 +275,8 @@
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 31%;
-    left: 25%;
+    top: 35%;
+    left: 22%;
     transform: translate(-50%, -50%);
     background-color: darkcyan;
     color: white;
@@ -222,7 +289,7 @@
 }
 
 .table5 {
-    width: 100px;
+    width: 160px;
     height: 30px;
     display: flex;
     flex-direction: row;
@@ -230,8 +297,8 @@
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 37%;
-    left: 25%;
+    top: 41%;
+    left: 22%;
     transform: translate(-50%, -50%);
     background-color: darkcyan;
     color: white;

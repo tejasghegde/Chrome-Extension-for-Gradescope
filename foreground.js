@@ -15,6 +15,9 @@ const ce_weight_container = document.createElement("DIV");
 const ce_weight = document.createElement("DIV");
 const ce_weight_input = document.createElement("INPUT");
 
+const ce_category_container = document.createElement("DIV");
+const ce_category_name = document.createElement("DIV");
+
 
 ce_main_container.classList.add("ce_main");
 ce_name.id = "ce_name";
@@ -36,6 +39,11 @@ ce_button3.type = "button";
 ce_weight_container.classList.add("weight");
 ce_weight.id = "ce_weight";
 ce_weight_input.id = "ce_weight_input";
+
+ce_category_container.classList.add("category");
+ce_category_name.id = "ce_category_name";
+ce_category_name.innerHTML = Array(2).fill('\xa0').join('') + `Category` + Array(4).fill('\xa0').join('') + `Weight` + Array(4).fill('\xa0').join('') + `Score`
+
 
 var table_data = [];
 
@@ -64,10 +72,13 @@ ce_toggle.appendChild(ce_button3);
 ce_weight_container.appendChild(ce_weight);
 ce_weight_container.appendChild(ce_weight_input);
 
+ce_category_container.appendChild(ce_category_name);
+
 document.querySelector("body").appendChild(ce_main_container);
 document.querySelector("body").appendChild(ce_span);
 document.querySelector("body").appendChild(ce_toggle);
 document.querySelector("body").appendChild(ce_weight_container);
+document.querySelector("body").appendChild(ce_category_container);
 
 
 if(typeof chrome.app.isInstalled!=='undefined'){
@@ -84,7 +95,6 @@ if(document.getElementById("ce_button") !== null) {
     chrome.runtime.sendMessage({
         message: "remove"
     }); 
-    console.log("hit");
 }
 
 ce_button2.addEventListener("click", () => {
@@ -237,14 +247,32 @@ ce_button.addEventListener("click", () => {
 
             const ce_table1_container = document.createElement("DIV");
             const ce_table1_name = document.createElement("DIV");
+            const ce_table1_2_container = document.createElement("DIV");
+            const ce_table1_2_name = document.createElement("DIV");
+            const ce_table1_3_container = document.createElement("DIV");
+            const ce_table1_3_name = document.createElement("DIV");
 
             ce_table1_container.classList.add("table1");
             ce_table1_name.id = "ce_table1_name";
-            ce_table1_name.innerHTML = Array(2).fill('\xa0').join('') + `${table_data[0][0]}` + Array(4).fill('\xa0').join('') + `${table_data[0][1]}`
+            ce_table1_name.innerHTML = `${table_data[0][0]}`
 
             ce_table1_container.appendChild(ce_table1_name);
-
             document.querySelector("body").appendChild(ce_table1_container);
+
+            ce_table1_2_container.classList.add("table1_2");
+            ce_table1_2_name.id = "ce_table1_2_name";
+            ce_table1_2_name.innerHTML = `${table_data[0][1]}`
+
+            ce_table1_2_container.appendChild(ce_table1_2_name);
+            document.querySelector("body").appendChild(ce_table1_2_container);
+
+            ce_table1_3_container.classList.add("table1_3");
+            ce_table1_3_name.id = "ce_table1_3_name";
+            ce_table1_3_name.innerHTML = `${table_data[0][2]}`
+
+            ce_table1_3_container.appendChild(ce_table1_3_name);
+            document.querySelector("body").appendChild(ce_table1_3_container);
+
 
             document.getElementById("ce_input").value = "";
             document.getElementById("ce_weight_input").value = "";
@@ -255,7 +283,10 @@ ce_button.addEventListener("click", () => {
 
                 ce_table2_container.classList.add("table2");
                 ce_table2_name.id = "ce_table2_name";
-                ce_table2_name.innerHTML = Array(2).fill('\xa0').join('') + `${table_data[1][0]}` + Array(4).fill('\xa0').join('') + `${table_data[1][1]}`
+                ce_table2_name.innerHTML = Array(2).fill('\xa0').join('') + 
+                `${table_data[1][0]}` + Array(10 - table_data[1][0].length).fill('&nbsp').join('') + 
+                `${table_data[1][1]}` + Array(4).fill('\xa0').join('') + 
+                `${table_data[1][2]}`
 
                 ce_table2_container.appendChild(ce_table2_name);
 
@@ -270,7 +301,10 @@ ce_button.addEventListener("click", () => {
 
                 ce_table3_container.classList.add("table3");
                 ce_table3_name.id = "ce_table3_name";
-                ce_table3_name.innerHTML = Array(2).fill('\xa0').join('') + `${table_data[2][0]}` + Array(4).fill('\xa0').join('') + `${table_data[2][1]}`
+                ce_table3_name.innerHTML = Array(2).fill('\xa0').join('') + 
+                `${table_data[2][0]}` + Array(4).fill('\xa0').join('') + 
+                `${table_data[2][1]}` + Array(4).fill('\xa0').join('') + 
+                `${table_data[2][2]}`
 
                 ce_table3_container.appendChild(ce_table3_name);
 
@@ -287,7 +321,10 @@ ce_button.addEventListener("click", () => {
 
                 ce_table4_container.classList.add("table4");
                 ce_table4_name.id = "ce_table4_name";
-                ce_table4_name.innerHTML = Array(2).fill('\xa0').join('') + `${table_data[3][0]}` + Array(4).fill('\xa0').join('') + `${table_data[3][1]}`
+                ce_table4_name.innerHTML = Array(2).fill('\xa0').join('') + 
+                `${table_data[3][0]}` + Array(4).fill('\xa0').join('') + 
+                `${table_data[3][1]}` + Array(4).fill('\xa0').join('') + 
+                `${table_data[3][2]}`
 
                 ce_table4_container.appendChild(ce_table4_name);
 
@@ -303,7 +340,10 @@ ce_button.addEventListener("click", () => {
 
                 ce_table5_container.classList.add("table5");
                 ce_table5_name.id = "ce_table5_name";
-                ce_table5_name.innerHTML = Array(2).fill('\xa0').join('') + `${table_data[4][0]}` + Array(4).fill('\xa0').join('') + `${table_data[4][1]}`
+                ce_table5_name.innerHTML = Array(2).fill('\xa0').join('') + 
+                `${table_data[4][0]}` + Array(4).fill('\xa0').join('') + 
+                `${table_data[4][1]}` + Array(4).fill('\xa0').join('') + 
+                `${table_data[4][2]}`
 
                 ce_table5_container.appendChild(ce_table5_name);
 
