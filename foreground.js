@@ -11,6 +11,10 @@ const ce_toggle = document.createElement("DIV");
 const ce_button2 = document.createElement("INPUT");
 const ce_button3 = document.createElement("INPUT");
 
+const ce_weight_container = document.createElement("DIV");
+const ce_weight = document.createElement("DIV");
+const ce_weight_input = document.createElement("INPUT");
+
 
 ce_main_container.classList.add("ce_main");
 ce_name.id = "ce_name";
@@ -29,14 +33,23 @@ ce_button3.id = "ce_button3";
 ce_button3.value = "–";
 ce_button3.type = "button";
 
+ce_weight_container.classList.add("weight");
+ce_weight.id = "ce_weight";
+ce_weight_input.id = "ce_weight_input";
+
+var table_data = [];
 
 ce_name.innerHTML = `Percentage: NAME`;
 ce_button.innerHTML = `Calculate Score`;
 
 var x = 0;
 
-ce_name2.innerHTML = `Drops`
+ce_name2.innerHTML = `Drops`;
 ce_value.innerHTML = x;
+
+var weightage = 100;
+
+ce_weight.innerHTML = Array(2).fill('\xa0').join('') + `Weight` + Array(3).fill('\xa0').join('');
 
 ce_main_container.appendChild(ce_name);
 ce_main_container.appendChild(ce_input);
@@ -48,17 +61,21 @@ ce_span.appendChild(ce_value);
 ce_toggle.appendChild(ce_button2);
 ce_toggle.appendChild(ce_button3);
 
+ce_weight_container.appendChild(ce_weight);
+ce_weight_container.appendChild(ce_weight_input);
 
 document.querySelector("body").appendChild(ce_main_container);
 document.querySelector("body").appendChild(ce_span);
 document.querySelector("body").appendChild(ce_toggle);
+document.querySelector("body").appendChild(ce_weight_container);
+
 
 if(typeof chrome.app.isInstalled!=='undefined'){
     chrome.runtime.sendMessage({
         message: "get_name"
     }, response => {
         if (response.message == "success") {
-            ce_name.innerHTML = `Percentage: 0%`
+            ce_name.innerHTML = `Percentage:`
         }
     }); 
 }
@@ -180,6 +197,9 @@ ce_button.addEventListener("click", () => {
                     percentage_list.pop();
                 }
             }
+
+            x = 0;
+            ce_value.innerHTML = `${x}`;
             
             var new_targets = [];
             for (var i = 0; i < percentage_list.length; i++) {
@@ -198,9 +218,108 @@ ce_button.addEventListener("click", () => {
             }
 
             var answer = numerator/denominator;
+            if (ce_weight_input.value != "") {
+                weightage = ce_weight_input.value;
+            }    
+            answer = (answer * weightage) / 100;
             answer = Math.round(answer * 10000)/100;
             answer = answer.toString() + "%";
-            ce_name.innerHTML = `Percentage: ${answer}`;
+
+            
+
+            if (ce_input.value == "") {
+                table_data.push(["Overall", "100", parseFloat(answer)])
+            } else if (ce_weight_input.value == ""){
+            table_data.push([ce_input.value, "100", parseFloat(answer)])
+            } else {
+                table_data.push([ce_input.value, ce_weight_input.value, parseFloat(answer)])
+            }
+
+            const ce_table1_container = document.createElement("DIV");
+            const ce_table1_name = document.createElement("DIV");
+
+            ce_table1_container.classList.add("table1");
+            ce_table1_name.id = "ce_table1_name";
+            ce_table1_name.innerHTML = Array(2).fill('\xa0').join('') + `${table_data[0][0]}` + Array(4).fill('\xa0').join('') + `${table_data[0][1]}`
+
+            ce_table1_container.appendChild(ce_table1_name);
+
+            document.querySelector("body").appendChild(ce_table1_container);
+
+            document.getElementById("ce_input").value = "";
+            document.getElementById("ce_weight_input").value = "";
+
+            if (table_data.length > 1) {
+                const ce_table2_container = document.createElement("DIV");
+                const ce_table2_name = document.createElement("DIV");
+
+                ce_table2_container.classList.add("table2");
+                ce_table2_name.id = "ce_table2_name";
+                ce_table2_name.innerHTML = Array(2).fill('\xa0').join('') + `${table_data[1][0]}` + Array(4).fill('\xa0').join('') + `${table_data[1][1]}`
+
+                ce_table2_container.appendChild(ce_table2_name);
+
+                document.querySelector("body").appendChild(ce_table2_container);
+
+                document.getElementById("ce_input").value = "";
+                document.getElementById("ce_weight_input").value = "";
+            }
+            if (table_data.length > 2) {
+                const ce_table3_container = document.createElement("DIV");
+                const ce_table3_name = document.createElement("DIV");
+
+                ce_table3_container.classList.add("table3");
+                ce_table3_name.id = "ce_table3_name";
+                ce_table3_name.innerHTML = Array(2).fill('\xa0').join('') + `${table_data[2][0]}` + Array(4).fill('\xa0').join('') + `${table_data[2][1]}`
+
+                ce_table3_container.appendChild(ce_table3_name);
+
+                document.querySelector("body").appendChild(ce_table3_container);
+
+                document.getElementById("ce_input").value = "";
+                document.getElementById("ce_weight_input").value = "";
+            }
+
+
+            if (table_data.length > 3) {
+                const ce_table4_container = document.createElement("DIV");
+                const ce_table4_name = document.createElement("DIV");
+
+                ce_table4_container.classList.add("table4");
+                ce_table4_name.id = "ce_table4_name";
+                ce_table4_name.innerHTML = Array(2).fill('\xa0').join('') + `${table_data[3][0]}` + Array(4).fill('\xa0').join('') + `${table_data[3][1]}`
+
+                ce_table4_container.appendChild(ce_table4_name);
+
+                document.querySelector("body").appendChild(ce_table4_container);
+
+                document.getElementById("ce_input").value = "";
+                document.getElementById("ce_weight_input").value = "";
+            }
+
+            if (table_data.length > 4) {
+                const ce_table5_container = document.createElement("DIV");
+                const ce_table5_name = document.createElement("DIV");
+
+                ce_table5_container.classList.add("table5");
+                ce_table5_name.id = "ce_table5_name";
+                ce_table5_name.innerHTML = Array(2).fill('\xa0').join('') + `${table_data[4][0]}` + Array(4).fill('\xa0').join('') + `${table_data[4][1]}`
+
+                ce_table5_container.appendChild(ce_table5_name);
+
+                document.querySelector("body").appendChild(ce_table5_container);
+
+                document.getElementById("ce_input").value = "";
+                document.getElementById("ce_weight_input").value = "";
+            }
+
+            sum = 0;
+            for (var i = 0; i < table_data.length; i++) {
+                sum += table_data[i][2];
+            }
+            ce_name.innerHTML = `Percentage: ${sum}%`;
         }
     });
 });
+
+
