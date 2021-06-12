@@ -1,7 +1,7 @@
 {
   "name": "Gradescope Calculator",
-  "description": "Calculates your score on Gradescope",
-  "version" :"1.0.0",
+  "description": "Calculates score on Gradescope",
+  "version" :"0.0.0.1",
   "manifest_version": 3,
   "action" : {
     "default_icon": {
@@ -17,7 +17,6 @@
   },
   "permissions": [
       "activeTab",
-      "tabs",
       "storage",
       "scripting"
   ],
@@ -30,6 +29,4 @@
       "48": "/images/Gradescope Logo48.png",
       "128": "/images/Gradescope Logo128.png"
   }
-  
-
 }
