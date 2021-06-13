@@ -103,8 +103,10 @@ ce_button2.addEventListener("click", () => {
 })
 
 ce_button3.addEventListener("click", () => {
-    x--;
-    ce_value.innerHTML = `${x}`;
+    if (x > 0) {
+        x--;
+        ce_value.innerHTML = `${x}`;
+    }
 })
 
 ce_button.addEventListener("click", () => {
