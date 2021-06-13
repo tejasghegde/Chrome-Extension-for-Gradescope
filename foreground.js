@@ -188,7 +188,7 @@
             }
             
             if (targets.length === 0) {
-                ce_percentage.innerHTML = `Ivalid category, reload page`;
+                ce_percentage.innerHTML = `Invalid category, reload page`;
                 return;
             }
             var percentage_list = [];
@@ -248,9 +248,9 @@
             
 
             if (ce_input.value == "") {
-                table_data.push(["Overall", "100", parseFloat(answer)])
+                table_data.push(["Overall", 100, parseFloat(answer)])
             } else if (ce_weight_input.value == ""){
-            table_data.push([ce_input.value, "100", parseFloat(answer)])
+            table_data.push([ce_input.value, 100, parseFloat(answer)])
             } else {
                 table_data.push([ce_input.value, ce_weight_input.value, parseFloat(answer)])
             }
@@ -417,7 +417,7 @@
 
             sum = 0;
             for (var i = 0; i < table_data.length; i++) {
-                sum += table_data[i][2];
+                sum += (table_data[i][2] * 100) / table_data[i][1];
             }
             ce_percentage.innerHTML = `Percentage: ${sum}%`;
         });
