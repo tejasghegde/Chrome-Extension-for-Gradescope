@@ -240,8 +240,7 @@
             var answer = numerator/denominator;
             if (ce_weight_input.value != "") {
                 weightage = ce_weight_input.value;
-            }    
-            answer = (answer * weightage) / 100;
+            }
             answer = Math.round(answer * 10000)/100;
             answer = answer.toString() + "%";
             weightage = 100;
@@ -417,7 +416,7 @@
 
             sum = 0;
             for (var i = 0; i < table_data.length; i++) {
-                sum += (table_data[i][2] * 100) / table_data[i][1];
+                sum += (table_data[i][2] * table_data[i][1]) / 100;
             }
             ce_percentage.innerHTML = `Percentage: ${sum}%`;
         });
