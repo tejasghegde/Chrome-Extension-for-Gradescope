@@ -1,13 +1,13 @@
 .ce_main {
     width: 235px;
-    height: 88px;
+    height: 130px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     position: absolute;
     z-index: 99999;
-    top: 15.5%;
+    top: 19.2%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
@@ -16,6 +16,11 @@
 }
 
 #ce_name {
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+}
+
+#ce_percentage {
     font-size: 24px;
     font-family: Arial, sans-serif;
 }
@@ -41,7 +46,7 @@
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 10%;
+    top: 10.5%;
     left: 72%;
     transform: translate(-50%, -50%);
     border-radius: 4px;
@@ -67,7 +72,7 @@
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 15%;
+    top: 16%;
     left: 71%;
     transform: translate(-50%, -50%);
     color: black;
@@ -98,7 +103,7 @@
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 20.5%;
+    top: 22%;
     left: 75%;
     transform: translate(-50%, -50%);
     color: white;
