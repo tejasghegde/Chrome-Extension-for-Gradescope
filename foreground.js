@@ -1,134 +1,124 @@
-const ce_main_container = document.createElement("DIV");
-const ce_name = document.createElement("DIV");
-const ce_input = document.createElement("INPUT");
-const ce_button = document.createElement("DIV");
-
-const ce_span = document.createElement("DIV");
-const ce_name2 = document.createElement("DIV");
-const ce_value = document.createElement("DIV");
-
-const ce_toggle = document.createElement("DIV");
-const ce_button2 = document.createElement("INPUT");
-const ce_button3 = document.createElement("INPUT");
-
-const ce_weight_container = document.createElement("DIV");
-const ce_weight = document.createElement("DIV");
-const ce_weight_input = document.createElement("INPUT");
-
-const ce_category_container = document.createElement("DIV");
-const ce_category_name = document.createElement("DIV");
-
-const ce_category2_container = document.createElement("DIV");
-const ce_category2_name = document.createElement("DIV");
-
-const ce_category3_container = document.createElement("DIV");
-const ce_category3_name = document.createElement("DIV");
-
-ce_main_container.classList.add("ce_main");
-ce_name.id = "ce_name";
-ce_input.id = "ce_input";
-ce_button.id = "ce_button";
-ce_name.innerHTML = `Percentage: NAME`;
-ce_button.innerHTML = `Calculate Score`;
-
-ce_span.classList.add("output_area");
-ce_name2.id = "ce_name2";
-ce_value.id = "ce_value";
-var x = 0;
-ce_name2.innerHTML = `Drops`;
-ce_value.innerHTML = x;
-
-ce_toggle.classList.add("toggler")
-ce_button2.id = "ce_button2";
-ce_button2.value = "+";
-ce_button2.type = "button";
-ce_button3.id = "ce_button3";
-ce_button3.value = "–";
-ce_button3.type = "button";
-
-ce_weight_container.classList.add("weight");
-ce_weight.id = "ce_weight";
-ce_weight_input.id = "ce_weight_input";
-var weightage = 100;
-ce_weight.innerHTML = `Weight`
-
-ce_category_container.classList.add("category");
-ce_category_name.id = "ce_category_name";
-ce_category_name.innerHTML = `Category`
-
-ce_category2_container.classList.add("category2");
-ce_category2_name.id = "ce_category2_name";
-ce_category2_name.innerHTML = `Weight`
-
-ce_category3_container.classList.add("category3");
-ce_category3_name.id = "ce_category3_name";
-ce_category3_name.innerHTML = `Score`
-
-var table_data = [];
-
-
-ce_main_container.appendChild(ce_name);
-ce_main_container.appendChild(ce_input);
-ce_main_container.appendChild(ce_button);
-
-ce_span.appendChild(ce_name2);
-ce_span.appendChild(ce_value);
-
-ce_toggle.appendChild(ce_button2);
-ce_toggle.appendChild(ce_button3);
-
-ce_weight_container.appendChild(ce_weight);
-ce_weight_container.appendChild(ce_weight_input);
-
-ce_category_container.appendChild(ce_category_name);
-
-ce_category2_container.appendChild(ce_category2_name);
-
-ce_category3_container.appendChild(ce_category3_name);
-
-document.querySelector("body").appendChild(ce_main_container);
-document.querySelector("body").appendChild(ce_span);
-document.querySelector("body").appendChild(ce_toggle);
-document.querySelector("body").appendChild(ce_weight_container);
-document.querySelector("body").appendChild(ce_category_container);
-document.querySelector("body").appendChild(ce_category2_container);
-document.querySelector("body").appendChild(ce_category3_container);
-
-
-if(typeof chrome.app.isInstalled!=='undefined'){
-    chrome.runtime.sendMessage({
-        message: "get_name"
-    }, response => {
-        if (response.message == "success") {
-            ce_name.innerHTML = `Percentage:`
-        }
-    }); 
-}
-
-if(document.getElementById("ce_button") !== null) {
-    chrome.runtime.sendMessage({
-        message: "remove"
-    }); 
-}
-
-ce_button2.addEventListener("click", () => {
-    x++
-    ce_value.innerHTML = `${x}`;
-})
-
-ce_button3.addEventListener("click", () => {
-    if (x > 0) {
-        x--;
-        ce_value.innerHTML = `${x}`;
+// Wrapping in a function to not leak/modify variables if the script
+// was already inserted before.
+(function() {
+    if (window.hasRun === true) {
+        window.hasRun = false;
+        return true;  // Will ultimately be passed back to executeScript
+    } else {
+        window.hasRun = true;
     }
-})
 
-ce_button.addEventListener("click", () => {
-    chrome.runtime.sendMessage({
-        message: "change_name",
-        payload: ce_input.value
-    }, response => {
-        if (response.message === "success") {
+    const ce_main_container = document.createElement("DIV");
+    const ce_name = document.createElement("DIV");
+    const ce_input = document.createElement("INPUT");
+    const ce_button = document.createElement("DIV");
+    const ce_percentage = document.createElement("DIV");
+
+    const ce_span = document.createElement("DIV");
+    const ce_name2 = document.createElement("DIV");
+    const ce_value = document.createElement("DIV");
+
+    const ce_toggle = document.createElement("DIV");
+    const ce_button2 = document.createElement("INPUT");
+    const ce_button3 = document.createElement("INPUT");
+
+    const ce_weight_container = document.createElement("DIV");
+    const ce_weight = document.createElement("DIV");
+    const ce_weight_input = document.createElement("INPUT");
+
+    const ce_category_container = document.createElement("DIV");
+    const ce_category_name = document.createElement("DIV");
+
+    const ce_category2_container = document.createElement("DIV");
+    const ce_category2_name = document.createElement("DIV");
+
+    const ce_category3_container = document.createElement("DIV");
+    const ce_category3_name = document.createElement("DIV");
+
+    ce_main_container.classList.add("ce_main");
+    ce_name.id = "ce_name";
+    ce_input.id = "ce_input";
+    ce_button.id = "ce_button";
+    ce_name.innerHTML = `Category`;
+    ce_button.innerHTML = `Calculate Score`;
+    ce_percentage.id = "ce_percentage";
+    ce_percentage.innerHTML = `Percentage: 0%`;
+
+    ce_span.classList.add("output_area");
+    ce_name2.id = "ce_name2";
+    ce_value.id = "ce_value";
+    var x = 0;
+    ce_name2.innerHTML = `Drops`;
+    ce_value.innerHTML = x;
+
+    ce_toggle.classList.add("toggler")
+    ce_button2.id = "ce_button2";
+    ce_button2.value = "+";
+    ce_button2.type = "button";
+    ce_button3.id = "ce_button3";
+    ce_button3.value = "–";
+    ce_button3.type = "button";
+
+    ce_weight_container.classList.add("weight");
+    ce_weight.id = "ce_weight";
+    ce_weight_input.id = "ce_weight_input";
+    var weightage = 100;
+    ce_weight.innerHTML = `Weight`
+
+    ce_category_container.classList.add("category");
+    ce_category_name.id = "ce_category_name";
+    ce_category_name.innerHTML = `Category`
+
+    ce_category2_container.classList.add("category2");
+    ce_category2_name.id = "ce_category2_name";
+    ce_category2_name.innerHTML = `Weight`
+
+    ce_category3_container.classList.add("category3");
+    ce_category3_name.id = "ce_category3_name";
+    ce_category3_name.innerHTML = `Score`
+
+    var table_data = [];
+
+
+    ce_main_container.append(ce_name, ce_input, ce_button, ce_percentage);
+
+    ce_span.append(ce_name2, ce_value);
+
+    ce_toggle.append(ce_button2, ce_button3);
+
+    ce_weight_container.append(ce_weight, ce_weight_input);
+
+    ce_category_container.append(ce_category_name);
+
+    ce_category2_container.append(ce_category2_name);
+
+    ce_category3_container.append(ce_category3_name);
+
+    document.querySelector("body").append(ce_main_container, 
+        ce_span, ce_toggle, ce_weight_container, 
+        ce_category_container, ce_category2_container, 
+        ce_category3_container);
+
+
+    if (document.getElementById("ce_button") !== null) {
+        chrome.runtime.sendMessage({
+            message: "remove"
+        }); 
+    }
+
+    ce_button2.addEventListener("click", () => {
+        x++
+        ce_value.innerHTML = `${x}`;
+    })
+
+    ce_button3.addEventListener("click", () => {
+        if (x > 0) {
+            x--;
+            ce_value.innerHTML = `${x}`;
+        }
+    })
+
+    ce_button.addEventListener("click", () => {
             var row1 = document.getElementsByClassName("odd");   // querySelectorAll('[role="row"]')
             var score1 = [];
             for (var i = 0; i < row1.length; i++) {
@@ -250,7 +240,7 @@ ce_button.addEventListener("click", () => {
             answer = (answer * weightage) / 100;
             answer = Math.round(answer * 10000)/100;
             answer = answer.toString() + "%";
-
+            weightage = 100;
             
 
             if (ce_input.value == "") {
@@ -259,6 +249,15 @@ ce_button.addEventListener("click", () => {
             table_data.push([ce_input.value, "100", parseFloat(answer)])
             } else {
                 table_data.push([ce_input.value, ce_weight_input.value, parseFloat(answer)])
+            }
+
+            total_weight = 0;
+            for (var i = 0; i < table_data.length; i++) {
+                total_weight += parseFloat(table_data[i][1]);
+                if (total_weight > 100) {
+                    ce_percentage.innerHTML = `Invalid weight, reload`;
+                    return;
+                }
             }
 
             const ce_table1_container = document.createElement("DIV");
@@ -288,7 +287,6 @@ ce_button.addEventListener("click", () => {
 
             ce_table1_3_container.appendChild(ce_table1_3_name);
             document.querySelector("body").appendChild(ce_table1_3_container);
-
 
             document.getElementById("ce_input").value = "";
             document.getElementById("ce_weight_input").value = "";
@@ -352,7 +350,6 @@ ce_button.addEventListener("click", () => {
                 ce_table3_3_container.appendChild(ce_table3_3_name);
                 document.querySelector("body").appendChild(ce_table3_3_container);
             }
-
 
             if (table_data.length > 3) {
                 const ce_table4_container = document.createElement("DIV");
@@ -418,9 +415,7 @@ ce_button.addEventListener("click", () => {
             for (var i = 0; i < table_data.length; i++) {
                 sum += table_data[i][2];
             }
-            ce_name.innerHTML = `Percentage: ${sum}%`;
-        }
-    });
-});
-
-
+            ce_percentage.innerHTML = `Percentage: ${sum}%`;
+        });
+    // No return value here, so the return value is "undefined" (without quotes).
+})(); // <-- Invoke function. The return value is passed back to executeScript
