@@ -20,6 +20,5 @@ chrome.action.onClicked.addListener((tabId) => {
                     files: ["foreground_styles.css"]
                 })
             }
-              console.log(injectionResults);
         });
 });
