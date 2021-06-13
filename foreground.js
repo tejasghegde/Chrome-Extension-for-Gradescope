@@ -186,7 +186,11 @@
                             targets.push(i);
                 }
             }
-
+            
+            if (targets.length === 0) {
+                ce_percentage.innerHTML = `Ivalid category, reload page`;
+                return;
+            }
             var percentage_list = [];
             for (var i = 0; i < targets.length; i++) {
                 if (score_list[targets[i]] != "Not yet") {
@@ -255,7 +259,7 @@
             for (var i = 0; i < table_data.length; i++) {
                 total_weight += parseFloat(table_data[i][1]);
                 if (total_weight > 100) {
-                    ce_percentage.innerHTML = `Invalid weight, reload`;
+                    ce_percentage.innerHTML = `Invalid weight, reload page`;
                     return;
                 }
             }
