@@ -18,15 +18,25 @@ const ce_weight_input = document.createElement("INPUT");
 const ce_category_container = document.createElement("DIV");
 const ce_category_name = document.createElement("DIV");
 
+const ce_category2_container = document.createElement("DIV");
+const ce_category2_name = document.createElement("DIV");
+
+const ce_category3_container = document.createElement("DIV");
+const ce_category3_name = document.createElement("DIV");
 
 ce_main_container.classList.add("ce_main");
 ce_name.id = "ce_name";
 ce_input.id = "ce_input";
 ce_button.id = "ce_button";
+ce_name.innerHTML = `Percentage: NAME`;
+ce_button.innerHTML = `Calculate Score`;
 
 ce_span.classList.add("output_area");
 ce_name2.id = "ce_name2";
 ce_value.id = "ce_value";
+var x = 0;
+ce_name2.innerHTML = `Drops`;
+ce_value.innerHTML = x;
 
 ce_toggle.classList.add("toggler")
 ce_button2.id = "ce_button2";
@@ -39,25 +49,23 @@ ce_button3.type = "button";
 ce_weight_container.classList.add("weight");
 ce_weight.id = "ce_weight";
 ce_weight_input.id = "ce_weight_input";
+var weightage = 100;
+ce_weight.innerHTML = `Weight`
 
 ce_category_container.classList.add("category");
 ce_category_name.id = "ce_category_name";
-ce_category_name.innerHTML = Array(2).fill('\xa0').join('') + `Category` + Array(4).fill('\xa0').join('') + `Weight` + Array(4).fill('\xa0').join('') + `Score`
+ce_category_name.innerHTML = `Category`
 
+ce_category2_container.classList.add("category2");
+ce_category2_name.id = "ce_category2_name";
+ce_category2_name.innerHTML = `Weight`
+
+ce_category3_container.classList.add("category3");
+ce_category3_name.id = "ce_category3_name";
+ce_category3_name.innerHTML = `Score`
 
 var table_data = [];
 
-ce_name.innerHTML = `Percentage: NAME`;
-ce_button.innerHTML = `Calculate Score`;
-
-var x = 0;
-
-ce_name2.innerHTML = `Drops`;
-ce_value.innerHTML = x;
-
-var weightage = 100;
-
-ce_weight.innerHTML = Array(2).fill('\xa0').join('') + `Weight` + Array(3).fill('\xa0').join('');
 
 ce_main_container.appendChild(ce_name);
 ce_main_container.appendChild(ce_input);
@@ -74,11 +82,17 @@ ce_weight_container.appendChild(ce_weight_input);
 
 ce_category_container.appendChild(ce_category_name);
 
+ce_category2_container.appendChild(ce_category2_name);
+
+ce_category3_container.appendChild(ce_category3_name);
+
 document.querySelector("body").appendChild(ce_main_container);
 document.querySelector("body").appendChild(ce_span);
 document.querySelector("body").appendChild(ce_toggle);
 document.querySelector("body").appendChild(ce_weight_container);
 document.querySelector("body").appendChild(ce_category_container);
+document.querySelector("body").appendChild(ce_category2_container);
+document.querySelector("body").appendChild(ce_category3_container);
 
 
 if(typeof chrome.app.isInstalled!=='undefined'){
@@ -282,77 +296,122 @@ ce_button.addEventListener("click", () => {
             if (table_data.length > 1) {
                 const ce_table2_container = document.createElement("DIV");
                 const ce_table2_name = document.createElement("DIV");
+                const ce_table2_2_container = document.createElement("DIV");
+                const ce_table2_2_name = document.createElement("DIV");
+                const ce_table2_3_container = document.createElement("DIV");
+                const ce_table2_3_name = document.createElement("DIV");
 
                 ce_table2_container.classList.add("table2");
                 ce_table2_name.id = "ce_table2_name";
-                ce_table2_name.innerHTML = Array(2).fill('\xa0').join('') + 
-                `${table_data[1][0]}` + Array(10 - table_data[1][0].length).fill('&nbsp').join('') + 
-                `${table_data[1][1]}` + Array(4).fill('\xa0').join('') + 
-                `${table_data[1][2]}`
+                ce_table2_name.innerHTML = `${table_data[1][0]}`
 
                 ce_table2_container.appendChild(ce_table2_name);
-
                 document.querySelector("body").appendChild(ce_table2_container);
 
-                document.getElementById("ce_input").value = "";
-                document.getElementById("ce_weight_input").value = "";
+                ce_table2_2_container.classList.add("table2_2");
+                ce_table2_2_name.id = "ce_table2_2_name";
+                ce_table2_2_name.innerHTML = `${table_data[1][1]}`
+
+                ce_table2_2_container.appendChild(ce_table2_2_name);
+                document.querySelector("body").appendChild(ce_table2_2_container);
+
+                ce_table2_3_container.classList.add("table2_3");
+                ce_table2_3_name.id = "ce_table2_3_name";
+                ce_table2_3_name.innerHTML = `${table_data[1][2]}`
+
+                ce_table2_3_container.appendChild(ce_table2_3_name);
+                document.querySelector("body").appendChild(ce_table2_3_container);
             }
+
             if (table_data.length > 2) {
                 const ce_table3_container = document.createElement("DIV");
                 const ce_table3_name = document.createElement("DIV");
+                const ce_table3_2_container = document.createElement("DIV");
+                const ce_table3_2_name = document.createElement("DIV");
+                const ce_table3_3_container = document.createElement("DIV");
+                const ce_table3_3_name = document.createElement("DIV");
 
                 ce_table3_container.classList.add("table3");
                 ce_table3_name.id = "ce_table3_name";
-                ce_table3_name.innerHTML = Array(2).fill('\xa0').join('') + 
-                `${table_data[2][0]}` + Array(4).fill('\xa0').join('') + 
-                `${table_data[2][1]}` + Array(4).fill('\xa0').join('') + 
-                `${table_data[2][2]}`
+                ce_table3_name.innerHTML = `${table_data[2][0]}`
 
                 ce_table3_container.appendChild(ce_table3_name);
-
                 document.querySelector("body").appendChild(ce_table3_container);
 
-                document.getElementById("ce_input").value = "";
-                document.getElementById("ce_weight_input").value = "";
+                ce_table3_2_container.classList.add("table3_2");
+                ce_table3_2_name.id = "ce_table3_2_name";
+                ce_table3_2_name.innerHTML = `${table_data[2][1]}`
+
+                ce_table3_2_container.appendChild(ce_table3_2_name);
+                document.querySelector("body").appendChild(ce_table3_2_container);
+
+                ce_table3_3_container.classList.add("table3_3");
+                ce_table3_3_name.id = "ce_table3_3_name";
+                ce_table3_3_name.innerHTML = `${table_data[2][2]}`
+
+                ce_table3_3_container.appendChild(ce_table3_3_name);
+                document.querySelector("body").appendChild(ce_table3_3_container);
             }
 
 
             if (table_data.length > 3) {
                 const ce_table4_container = document.createElement("DIV");
                 const ce_table4_name = document.createElement("DIV");
+                const ce_table4_2_container = document.createElement("DIV");
+                const ce_table4_2_name = document.createElement("DIV");
+                const ce_table4_3_container = document.createElement("DIV");
+                const ce_table4_3_name = document.createElement("DIV");
 
                 ce_table4_container.classList.add("table4");
                 ce_table4_name.id = "ce_table4_name";
-                ce_table4_name.innerHTML = Array(2).fill('\xa0').join('') + 
-                `${table_data[3][0]}` + Array(4).fill('\xa0').join('') + 
-                `${table_data[3][1]}` + Array(4).fill('\xa0').join('') + 
-                `${table_data[3][2]}`
+                ce_table4_name.innerHTML = `${table_data[3][0]}`
 
                 ce_table4_container.appendChild(ce_table4_name);
-
                 document.querySelector("body").appendChild(ce_table4_container);
 
-                document.getElementById("ce_input").value = "";
-                document.getElementById("ce_weight_input").value = "";
+                ce_table4_2_container.classList.add("table4_2");
+                ce_table4_2_name.id = "ce_table4_2_name";
+                ce_table4_2_name.innerHTML = `${table_data[3][1]}`
+
+                ce_table4_2_container.appendChild(ce_table4_2_name);
+                document.querySelector("body").appendChild(ce_table4_2_container);
+
+                ce_table4_3_container.classList.add("table4_3");
+                ce_table4_3_name.id = "ce_table4_3_name";
+                ce_table4_3_name.innerHTML = `${table_data[3][2]}`
+
+                ce_table4_3_container.appendChild(ce_table4_3_name);
+                document.querySelector("body").appendChild(ce_table4_3_container);
             }
 
             if (table_data.length > 4) {
                 const ce_table5_container = document.createElement("DIV");
                 const ce_table5_name = document.createElement("DIV");
+                const ce_table5_2_container = document.createElement("DIV");
+                const ce_table5_2_name = document.createElement("DIV");
+                const ce_table5_3_container = document.createElement("DIV");
+                const ce_table5_3_name = document.createElement("DIV");
 
                 ce_table5_container.classList.add("table5");
                 ce_table5_name.id = "ce_table5_name";
-                ce_table5_name.innerHTML = Array(2).fill('\xa0').join('') + 
-                `${table_data[4][0]}` + Array(4).fill('\xa0').join('') + 
-                `${table_data[4][1]}` + Array(4).fill('\xa0').join('') + 
-                `${table_data[4][2]}`
+                ce_table5_name.innerHTML = `${table_data[4][0]}`
 
                 ce_table5_container.appendChild(ce_table5_name);
-
                 document.querySelector("body").appendChild(ce_table5_container);
 
-                document.getElementById("ce_input").value = "";
-                document.getElementById("ce_weight_input").value = "";
+                ce_table5_2_container.classList.add("table5_2");
+                ce_table5_2_name.id = "ce_table5_2_name";
+                ce_table5_2_name.innerHTML = `${table_data[4][1]}`
+
+                ce_table5_2_container.appendChild(ce_table5_2_name);
+                document.querySelector("body").appendChild(ce_table5_2_container);
+
+                ce_table5_3_container.classList.add("table5_3");
+                ce_table5_3_name.id = "ce_table5_3_name";
+                ce_table5_3_name.innerHTML = `${table_data[4][2]}`
+
+                ce_table5_3_container.appendChild(ce_table5_3_name);
+                document.querySelector("body").appendChild(ce_table5_3_container);            
             }
 
             sum = 0;
