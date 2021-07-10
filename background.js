@@ -15,10 +15,13 @@ chrome.action.onClicked.addListener((tabId) => {
                 })
             }
             else if (injectionResults[0].result === true) {
-                chrome.scripting.removeCSS({
-                    target: {tabId: tabId.id},
-                    files: ["foreground_styles.css"]
-                })
+                chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
+                    chrome.tabs.reload(tabId.id);
+                });
+                // chrome.scripting.removeCSS({
+                //     target: {tabId: tabId.id},
+                //     files: ["foreground_styles.css"]
+                // })
             }
         });
 });
