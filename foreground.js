@@ -179,9 +179,9 @@
 
             var targets = [];
             for (var i = 0; i < new_list.length; i++) {
-                if (new_list[i].includes(ce_input.value) === true) {
+                if (new_list[i].toLowerCase().includes(ce_input.value.toLowerCase()) === true) {
                     targets.push(i);
-                } else if (ce_input.value == "Homework" && 
+                } else if (ce_input.value.toLowerCase() == "homework" && 
                 new_list[i].includes("HW")) {
                             targets.push(i);
                 }
