@@ -418,6 +418,7 @@
             for (var i = 0; i < table_data.length; i++) {
                 sum += (table_data[i][2] * table_data[i][1]) / 100;
             }
+            sum = Math.round(sum * 100)/100;
             ce_percentage.innerHTML = `Percentage: ${sum}%`;
         });
     // No return value here, so the return value is "undefined" (without quotes).
