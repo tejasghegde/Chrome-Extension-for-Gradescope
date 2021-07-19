@@ -1,14 +1,52 @@
-.ce_main {
-    width: 235px;
-    height: 130px;
+.outer_box {
+    width: 600px;
+    height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     position: absolute;
     z-index: 99999;
-    top: 19.2%;
+    top: 30%;
     left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+    
+}
+
+.head {
+    width: 235px;
+    height: 53px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    z-index: 99999;
+    top: 13%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    background-color: darkcyan;
+    border-radius: 4px;
+}
+
+#ce_percentage {
+    font-size: 24px;
+    font-family: Arial, sans-serif;
+}
+
+.ce_main {
+    width: 120px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    z-index: 99999;
+    top: 65%;
+    left: 10%;
     transform: translate(-50%, -50%);
     color: white;
     background-color: darkcyan;
@@ -20,37 +58,81 @@
     font-family: Arial, sans-serif;
 }
 
-#ce_percentage {
-    font-size: 24px;
-    font-family: Arial, sans-serif;
+#ce_input {
+    width: 70%;
+    border-radius: 4px;
 }
 
-#ce_input {
+.score {
+    width: 100px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    z-index: 99999;
+    top: 65%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    color: white;
     border-radius: 4px;
+    box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
 }
 
 #ce_button {
-    padding: 10px 10px;
-    border-radius: 4px;
+    padding: 15px 8px;
+    border-radius: 5px;
     background-color: black;
     cursor: pointer;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.weight {
+    width: 90px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    z-index: 99999;
+    top: 65%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    color: white;
+    background-color: darkcyan;
+    border-radius: 4px;
+}
+
+#ce_weight {
+    font-size: 18px;
     font-family: Arial, sans-serif;
 }
 
+#ce_weight_input {
+    width: 70%;
+    border-radius: 4px;
+}
+
 .output_area {
-    width: 39px;
-    height: 27px;
+    width: 49px;
+    height: 34px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     position: absolute;
-    z-index: 999999;
-    top: 10.5%;
-    left: 72%;
+    z-index: 99999;
+    top: 58%;
+    left: 43.5%;
     transform: translate(-50%, -50%);
     border-radius: 4px;
-    color: black;
+    color: white;
+    background-color: darkcyan;
+
 }
 
 #ce_name2 {
@@ -71,9 +153,9 @@
     justify-content: space-between;
     align-items: center;
     position: absolute;
-    z-index: 999999;
-    top: 16%;
-    left: 71%;
+    z-index: 99999;
+    top: 75%;
+    left: 42.4%;
     transform: translate(-50%, -50%);
     color: black;
 }
@@ -94,44 +176,17 @@
     font-family: Arial, sans-serif;
 }
 
-.weight {
-    width: 110px;
-    height: 30px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    position: absolute;
-    z-index: 999999;
-    top: 22%;
-    left: 75%;
-    transform: translate(-50%, -50%);
-    color: white;
-    background-color: darkcyan;
-    border-radius: 4px;
-}
-
-#ce_weight {
-    font-size: 18px;
-    font-family: Arial, sans-serif;
-}
-
-#ce_weight_input {
-    width: 30%;
-    border-radius: 4px;
-}
-
 .category {
-    width: 90px;
+    width: 70px;
     height: 30px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     position: absolute;
-    z-index: 999999;
-    top: 11%;
-    left: 16%;
+    z-index: 99999;
+    top: 51%;
+    left: 79%;
     transform: translate(-50%, -50%);
     background-color: darkcyan;
     color: white;
@@ -145,16 +200,16 @@
 }
 
 .category2 {
-    width: 38px;
+    width: 40px;
     height: 30px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     position: absolute;
-    z-index: 999999;
-    top: 11%;
-    left: 25%;
+    z-index: 99999;
+    top: 51%;
+    left: 89%;
     transform: translate(-50%, -50%);
     background-color: darkcyan;
     color: white;
@@ -174,9 +229,9 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    z-index: 999999;
-    top: 11%;
-    left: 31%;
+    z-index: 99999;
+    top: 51%;
+    left: 96.3%;
     transform: translate(-50%, -50%);
     background-color: darkcyan;
     color: white;
@@ -189,7 +244,7 @@
 }
 
 .table1 {
-    width: 90px;
+    width: 70px;
     height: 30px;
     display: flex;
     flex-direction: row;
@@ -197,8 +252,8 @@
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 17%;
-    left: 16%;
+    top: 67.5%;
+    left: 79%;
     transform: translate(-50%, -50%);
     background-color: darkcyan;
     color: white;
@@ -212,7 +267,7 @@
 }
 
 .table1_2 {
-    width: 38px;
+    width: 40px;
     height: 30px;
     display: flex;
     flex-direction: row;
@@ -220,8 +275,8 @@
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 17%;
-    left: 25%;
+    top: 67.5%;
+    left: 89%;
     transform: translate(-50%, -50%);
     background-color: darkcyan;
     color: white;
@@ -242,8 +297,8 @@
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 17%;
-    left: 31%;
+    top: 67.5%;
+    left: 96.3%;
     transform: translate(-50%, -50%);
     background-color: darkcyan;
     color: white;
@@ -256,7 +311,7 @@
 }
 
 .table2 {
-    width: 90px;
+    width: 70px;
     height: 30px;
     display: flex;
     flex-direction: row;
@@ -264,8 +319,8 @@
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 23%;
-    left: 16%;
+    top: 84%;
+    left: 79%;
     transform: translate(-50%, -50%);
     background-color: darkcyan;
     color: white;
@@ -279,7 +334,7 @@
 }
 
 .table2_2 {
-    width: 38px;
+    width: 40px;
     height: 30px;
     display: flex;
     flex-direction: row;
@@ -287,8 +342,8 @@
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 23%;
-    left: 25%;
+    top: 84%;
+    left: 89%;
     transform: translate(-50%, -50%);
     background-color: darkcyan;
     color: white;
@@ -309,8 +364,8 @@
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 23%;
-    left: 31%;
+    top: 84%;
+    left: 96.3%;
     transform: translate(-50%, -50%);
     background-color: darkcyan;
     color: white;
@@ -323,7 +378,7 @@
 }
 
 .table3 {
-    width: 90px;
+    width: 70px;
     height: 30px;
     display: flex;
     flex-direction: row;
@@ -331,8 +386,8 @@
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 29%;
-    left: 16%;
+    top: 100.5%;
+    left: 79%;
     transform: translate(-50%, -50%);
     background-color: darkcyan;
     color: white;
@@ -346,7 +401,7 @@
 }
 
 .table3_2 {
-    width: 38px;
+    width: 40px;
     height: 30px;
     display: flex;
     flex-direction: row;
@@ -354,8 +409,8 @@
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 29%;
-    left: 25%;
+    top: 100.5%;
+    left: 89%;
     transform: translate(-50%, -50%);
     background-color: darkcyan;
     color: white;
@@ -376,8 +431,8 @@
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 29%;
-    left: 31%;
+    top: 100.5%;
+    left: 96.3%;
     transform: translate(-50%, -50%);
     background-color: darkcyan;
     color: white;
@@ -390,7 +445,7 @@
 }
 
 .table4 {
-    width: 90px;
+    width: 70px;
     height: 30px;
     display: flex;
     flex-direction: row;
@@ -398,8 +453,8 @@
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 35%;
-    left: 16%;
+    top: 117%;
+    left: 79%;
     transform: translate(-50%, -50%);
     background-color: darkcyan;
     color: white;
@@ -413,7 +468,7 @@
 }
 
 .table4_2 {
-    width: 38px;
+    width: 40px;
     height: 30px;
     display: flex;
     flex-direction: row;
@@ -421,8 +476,8 @@
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 35%;
-    left: 25%;
+    top: 117%;
+    left: 89%;
     transform: translate(-50%, -50%);
     background-color: darkcyan;
     color: white;
@@ -443,8 +498,8 @@
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 35%;
-    left: 31%;
+    top: 117%;
+    left: 96.3%;
     transform: translate(-50%, -50%);
     background-color: darkcyan;
     color: white;
@@ -457,7 +512,7 @@
 }
 
 .table5 {
-    width: 90px;
+    width: 70px;
     height: 30px;
     display: flex;
     flex-direction: row;
@@ -465,8 +520,8 @@
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 41%;
-    left: 16%;
+    top: 133.5%;
+    left: 79%;
     transform: translate(-50%, -50%);
     background-color: darkcyan;
     color: white;
@@ -480,7 +535,7 @@
 }
 
 .table5_2 {
-    width: 38px;
+    width: 40px;
     height: 30px;
     display: flex;
     flex-direction: row;
@@ -488,8 +543,8 @@
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 41%;
-    left: 25%;
+    top: 133.5%;
+    left: 89%;
     transform: translate(-50%, -50%);
     background-color: darkcyan;
     color: white;
@@ -510,8 +565,8 @@
     align-items: center;
     position: absolute;
     z-index: 999999;
-    top: 41%;
-    left: 31%;
+    top: 133.5%;
+    left: 96.3%;
     transform: translate(-50%, -50%);
     background-color: darkcyan;
     color: white;
