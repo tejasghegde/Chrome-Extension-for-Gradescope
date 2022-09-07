@@ -7,7 +7,7 @@
     align-items: center;
     position: absolute;
     z-index: 99999;
-    top: 30%;
+    top: 100px;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 4px;
@@ -28,6 +28,7 @@
     color: white;
     background-color: darkcyan;
     border-radius: 4px;
+    cursor: move;
 }
 
 #ce_percentage {
