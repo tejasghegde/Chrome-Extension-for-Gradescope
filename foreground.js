@@ -11,9 +11,7 @@
     const container = document.createElement("DIV");
 
     const ce_header = document.createElement("DIV");
-    const ce_percentage = document.createElement("DIV");
 
-    const button = document.createElement("DIV");
     const ce_button = document.createElement("DIV");
 
     const ce_main_container = document.createElement("DIV");
@@ -32,39 +30,28 @@
     const ce_weight = document.createElement("DIV");
     const ce_weight_input = document.createElement("INPUT");
 
-    const ce_category_container = document.createElement("DIV");
-    const ce_category_name = document.createElement("DIV");
+    container.id = "container";
 
-    const ce_category2_container = document.createElement("DIV");
-    const ce_category2_name = document.createElement("DIV");
+    ce_header.id = "ce_header";
+    ce_header.innerHTML = `Percentage: 0%`;
 
-    const ce_category3_container = document.createElement("DIV");
-    const ce_category3_name = document.createElement("DIV");
-
-    container.classList.add("outer_box");
-
-    ce_header.classList.add("head");
-    ce_percentage.id = "ce_percentage";
-    ce_percentage.innerHTML = `Percentage: 0%`;
-
-    button.classList.add("score");
     ce_button.id = "ce_button";
     ce_button.innerHTML = "Calculate Score";
     ce_button.type = "button";
 
-    ce_main_container.classList.add("ce_main");
+    ce_main_container.id = "ce_main_container";
     ce_name.id = "ce_name";
     ce_input.id = "ce_input";
     ce_name.innerHTML = `Category`;
 
-    ce_span.classList.add("output_area");
+    ce_span.id = "ce_span";
     ce_name2.id = "ce_name2";
     ce_value.id = "ce_value";
     var x = 0;
     ce_name2.innerHTML = `Drops`;
     ce_value.innerHTML = x;
 
-    ce_toggle.classList.add("toggler")
+    ce_toggle.id = "toggler";
     ce_button2.id = "ce_button2";
     ce_button2.value = "+";
     ce_button2.type = "button";
@@ -78,51 +65,47 @@
     var weightage = 100;
     ce_weight.innerHTML = `Weight`
 
-    ce_category_container.classList.add("category");
-    ce_category_name.id = "ce_category_name";
-    ce_category_name.innerHTML = `Category`
+    const ce_table = document.createElement("TABLE")
+    const ce_table_container1 = document.createElement("TR");
+    const ce_table_category = document.createElement("TD");
+    const ce_table_weight = document.createElement("TD");
+    const ce_table_score = document.createElement("TD");
 
-    ce_category2_container.classList.add("category2");
-    ce_category2_name.id = "ce_category2_name";
-    ce_category2_name.innerHTML = `Weight`
+    ce_table_container1.id = "table1";
+    ce_table_category.id = "table_category";
+    ce_table_weight.id = "table_weight";
+    ce_table_score.id = "table_score";
 
-    ce_category3_container.classList.add("category3");
-    ce_category3_name.id = "ce_category3_name";
-    ce_category3_name.innerHTML = `Score`
+    ce_table_category.innerHTML = `Category`;
+    ce_table_weight.innerHTML = `Weight`;
+    ce_table_score.innerHTML = `Score`;
 
     var table_data = [];
 
-    ce_header.append(ce_percentage);
-
-    button.append(ce_button);
-
     ce_main_container.append(ce_name, ce_input);
-
-    ce_span.append(ce_name2, ce_value);
 
     ce_toggle.append(ce_button2, ce_button3);
 
+    ce_span.append(ce_name2, ce_value, ce_toggle);
+
     ce_weight_container.append(ce_weight, ce_weight_input);
 
-    ce_category_container.append(ce_category_name);
+    ce_table_container1.append(ce_table_category, ce_table_weight,
+        ce_table_score);
+    
+    ce_table.append(ce_table_container1);
 
-    ce_category2_container.append(ce_category2_name);
-
-    ce_category3_container.append(ce_category3_name);
-
-    container.append(ce_header, button, ce_main_container, 
-        ce_span, ce_toggle, ce_weight_container, 
-        ce_category_container, ce_category2_container, 
-        ce_category3_container);
+    container.append(ce_header, ce_main_container, 
+        ce_weight_container, ce_span, ce_button,
+        ce_table);
 
     document.querySelector("body").append(container);
 
-    draggable = document.getElementsByClassName("outer_box");
-    dragElement(draggable[0]);
+    dragElement(document.getElementById("container"));
 
     function dragElement(elmnt) {
         var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-        document.getElementsByClassName("head")[0].onmousedown = dragMouseDown;
+        document.getElementById("ce_header").onmousedown = dragMouseDown;
     
 
     function dragMouseDown(e) {
@@ -244,7 +227,7 @@
             }
             
             if (targets.length === 0) {
-                ce_percentage.innerHTML = `Invalid category, reload page`;
+                ce_header.innerHTML = `Invalid category, reload page`;
                 return;
             }
             var percentage_list = [];
@@ -314,161 +297,138 @@
             for (var i = 0; i < table_data.length; i++) {
                 total_weight += parseFloat(table_data[i][1]);
                 if (total_weight > 100) {
-                    ce_percentage.innerHTML = `Invalid weight, reload page`;
+                    ce_header.innerHTML = `Invalid weight, reload page`;
                     return;
                 }
             }
+            if (table_data.length == 1){
+                const ce_table_container2 = document.createElement("TR");
+                const ce_table_category_1 = document.createElement("TH");
+                ce_table_category_1.id = "table_category_1";
+                ce_table_category_1.innerHTML = `${table_data[0][0]}`;
 
-            const ce_table1_container = document.createElement("DIV");
-            const ce_table1_name = document.createElement("DIV");
-            const ce_table1_2_container = document.createElement("DIV");
-            const ce_table1_2_name = document.createElement("DIV");
-            const ce_table1_3_container = document.createElement("DIV");
-            const ce_table1_3_name = document.createElement("DIV");
+                ce_table_container2.appendChild(ce_table_category_1);
 
-            ce_table1_container.classList.add("table1");
-            ce_table1_name.id = "ce_table1_name";
-            ce_table1_name.innerHTML = `${table_data[0][0]}`
+                const ce_table_weight_1 = document.createElement("TH");
+                ce_table_weight_1.id = "table_weight_1";
+                ce_table_weight_1.innerHTML = `${table_data[0][1]}`;
 
-            ce_table1_container.appendChild(ce_table1_name);
+                ce_table_container2.appendChild(ce_table_weight_1);
 
-            ce_table1_2_container.classList.add("table1_2");
-            ce_table1_2_name.id = "ce_table1_2_name";
-            ce_table1_2_name.innerHTML = `${table_data[0][1]}`
+                const ce_table_score_1 = document.createElement("TH");
+                ce_table_score_1.id = "table_score_1";
+                ce_table_score_1.innerHTML = `${table_data[0][2]}`;
 
-            ce_table1_2_container.appendChild(ce_table1_2_name);
+                ce_table_container2.appendChild(ce_table_score_1);
 
-            ce_table1_3_container.classList.add("table1_3");
-            ce_table1_3_name.id = "ce_table1_3_name";
-            ce_table1_3_name.innerHTML = `${table_data[0][2]}`
+                ce_table.append(ce_table_container2);
 
-            ce_table1_3_container.appendChild(ce_table1_3_name);
-            
+                document.getElementById("ce_input").value = "";
+                document.getElementById("ce_weight_input").value = "";
+            }
+                
+            if (table_data.length == 2) {
+                const ce_table_container3 = document.createElement("TR");
+                const ce_table_category_2 = document.createElement("TH");
+                ce_table_category_2.id = "table_category_2";
+                ce_table_category_2.innerHTML = `${table_data[1][0]}`;
+    
+                ce_table_container3.appendChild(ce_table_category_2);
+    
+                const ce_table_weight_2 = document.createElement("TH");
+                ce_table_weight_2.id = "table_weight_2";
+                ce_table_weight_2.innerHTML = `${table_data[1][1]}`;
+    
+                ce_table_container3.appendChild(ce_table_weight_2);
+    
+                const ce_table_score_2 = document.createElement("TH");
+                ce_table_score_2.id = "table_score_2";
+                ce_table_score_2.innerHTML = `${table_data[1][2]}`;
+    
+                ce_table_container3.appendChild(ce_table_score_2);
+    
+                ce_table.append(ce_table_container3);
 
-            document.getElementById("ce_input").value = "";
-            document.getElementById("ce_weight_input").value = "";
-
-            container.append(ce_table1_container, ce_table1_2_container,
-                ce_table1_3_container);
-            
-            if (table_data.length > 1) {
-                const ce_table2_container = document.createElement("DIV");
-                const ce_table2_name = document.createElement("DIV");
-                const ce_table2_2_container = document.createElement("DIV");
-                const ce_table2_2_name = document.createElement("DIV");
-                const ce_table2_3_container = document.createElement("DIV");
-                const ce_table2_3_name = document.createElement("DIV");
-
-                ce_table2_container.classList.add("table2");
-                ce_table2_name.id = "ce_table2_name";
-                ce_table2_name.innerHTML = `${table_data[1][0]}`
-
-                ce_table2_container.appendChild(ce_table2_name);
-
-                ce_table2_2_container.classList.add("table2_2");
-                ce_table2_2_name.id = "ce_table2_2_name";
-                ce_table2_2_name.innerHTML = `${table_data[1][1]}`
-
-                ce_table2_2_container.appendChild(ce_table2_2_name);
-
-                ce_table2_3_container.classList.add("table2_3");
-                ce_table2_3_name.id = "ce_table2_3_name";
-                ce_table2_3_name.innerHTML = `${table_data[1][2]}`
-
-                ce_table2_3_container.appendChild(ce_table2_3_name);
-
-                container.append(ce_table2_container, ce_table2_2_container,
-                    ce_table2_3_container);
+                document.getElementById("ce_input").value = "";
+                document.getElementById("ce_weight_input").value = "";
             }
 
-            if (table_data.length > 2) {
-                const ce_table3_container = document.createElement("DIV");
-                const ce_table3_name = document.createElement("DIV");
-                const ce_table3_2_container = document.createElement("DIV");
-                const ce_table3_2_name = document.createElement("DIV");
-                const ce_table3_3_container = document.createElement("DIV");
-                const ce_table3_3_name = document.createElement("DIV");
+            if (table_data.length == 3) {
+                const ce_table_container4 = document.createElement("TR");
+                const ce_table_category_3 = document.createElement("TH");
+                ce_table_category_3.id = "table_category_3";
+                ce_table_category_3.innerHTML = `${table_data[2][0]}`;
+    
+                ce_table_container4.appendChild(ce_table_category_3);
+    
+                const ce_table_weight_3 = document.createElement("TH");
+                ce_table_weight_3.id = "table_weight_3";
+                ce_table_weight_3.innerHTML = `${table_data[2][1]}`;
+    
+                ce_table_container4.appendChild(ce_table_weight_3);
+    
+                const ce_table_score_3 = document.createElement("TH");
+                ce_table_score_3.id = "table_score_3";
+                ce_table_score_3.innerHTML = `${table_data[2][2]}`;
+    
+                ce_table_container4.appendChild(ce_table_score_3);
+    
+                ce_table.append(ce_table_container4);
 
-                ce_table3_container.classList.add("table3");
-                ce_table3_name.id = "ce_table3_name";
-                ce_table3_name.innerHTML = `${table_data[2][0]}`
-
-                ce_table3_container.appendChild(ce_table3_name);
-
-                ce_table3_2_container.classList.add("table3_2");
-                ce_table3_2_name.id = "ce_table3_2_name";
-                ce_table3_2_name.innerHTML = `${table_data[2][1]}`
-
-                ce_table3_2_container.appendChild(ce_table3_2_name);
-
-                ce_table3_3_container.classList.add("table3_3");
-                ce_table3_3_name.id = "ce_table3_3_name";
-                ce_table3_3_name.innerHTML = `${table_data[2][2]}`
-
-                ce_table3_3_container.appendChild(ce_table3_3_name);
-
-                container.append(ce_table3_container, ce_table3_2_container,
-                    ce_table3_3_container);
+                document.getElementById("ce_input").value = "";
+                document.getElementById("ce_weight_input").value = "";
             }
 
-            if (table_data.length > 3) {
-                const ce_table4_container = document.createElement("DIV");
-                const ce_table4_name = document.createElement("DIV");
-                const ce_table4_2_container = document.createElement("DIV");
-                const ce_table4_2_name = document.createElement("DIV");
-                const ce_table4_3_container = document.createElement("DIV");
-                const ce_table4_3_name = document.createElement("DIV");
+            if (table_data.length == 4) {
+                const ce_table_container5 = document.createElement("TR");
+                const ce_table_category_4 = document.createElement("TH");
+                ce_table_category_4.id = "table_category_4";
+                ce_table_category_4.innerHTML = `${table_data[3][0]}`;
+    
+                ce_table_container5.appendChild(ce_table_category_4);
+    
+                const ce_table_weight_4 = document.createElement("TH");
+                ce_table_weight_4.id = "table_weight_4";
+                ce_table_weight_4.innerHTML = `${table_data[3][1]}`;
+    
+                ce_table_container5.appendChild(ce_table_weight_4);
+    
+                const ce_table_score_4 = document.createElement("TH");
+                ce_table_score_4.id = "table_score_4";
+                ce_table_score_4.innerHTML = `${table_data[3][2]}`;
+    
+                ce_table_container5.appendChild(ce_table_score_4);
+    
+                ce_table.append(ce_table_container5);
 
-                ce_table4_container.classList.add("table4");
-                ce_table4_name.id = "ce_table4_name";
-                ce_table4_name.innerHTML = `${table_data[3][0]}`
-
-                ce_table4_container.appendChild(ce_table4_name);
-
-                ce_table4_2_container.classList.add("table4_2");
-                ce_table4_2_name.id = "ce_table4_2_name";
-                ce_table4_2_name.innerHTML = `${table_data[3][1]}`
-
-                ce_table4_2_container.appendChild(ce_table4_2_name);
-
-                ce_table4_3_container.classList.add("table4_3");
-                ce_table4_3_name.id = "ce_table4_3_name";
-                ce_table4_3_name.innerHTML = `${table_data[3][2]}`
-
-                ce_table4_3_container.appendChild(ce_table4_3_name);
-
-                container.append(ce_table4_container, ce_table4_2_container,
-                    ce_table4_3_container);
+                document.getElementById("ce_input").value = "";
+                document.getElementById("ce_weight_input").value = "";
             }
 
-            if (table_data.length > 4) {
-                const ce_table5_container = document.createElement("DIV");
-                const ce_table5_name = document.createElement("DIV");
-                const ce_table5_2_container = document.createElement("DIV");
-                const ce_table5_2_name = document.createElement("DIV");
-                const ce_table5_3_container = document.createElement("DIV");
-                const ce_table5_3_name = document.createElement("DIV");
+            if (table_data.length == 5) {
+                const ce_table_container6 = document.createElement("TR");
+                const ce_table_category_5 = document.createElement("TH");
+                ce_table_category_5.id = "table_category_5";
+                ce_table_category_5.innerHTML = `${table_data[4][0]}`;
+    
+                ce_table_container6.appendChild(ce_table_category_5);
+    
+                const ce_table_weight_5 = document.createElement("TH");
+                ce_table_weight_5.id = "table_weight_5";
+                ce_table_weight_5.innerHTML = `${table_data[4][1]}`;
+    
+                ce_table_container6.appendChild(ce_table_weight_5);
+    
+                const ce_table_score_5 = document.createElement("TH");
+                ce_table_score_5.id = "table_score_5";
+                ce_table_score_5.innerHTML = `${table_data[4][2]}`;
+    
+                ce_table_container6.appendChild(ce_table_score_5);
+    
+                ce_table.append(ce_table_container6);
 
-                ce_table5_container.classList.add("table5");
-                ce_table5_name.id = "ce_table5_name";
-                ce_table5_name.innerHTML = `${table_data[4][0]}`
-
-                ce_table5_container.appendChild(ce_table5_name);
-
-                ce_table5_2_container.classList.add("table5_2");
-                ce_table5_2_name.id = "ce_table5_2_name";
-                ce_table5_2_name.innerHTML = `${table_data[4][1]}`
-
-                ce_table5_2_container.appendChild(ce_table5_2_name);
-
-                ce_table5_3_container.classList.add("table5_3");
-                ce_table5_3_name.id = "ce_table5_3_name";
-                ce_table5_3_name.innerHTML = `${table_data[4][2]}`
-
-                ce_table5_3_container.appendChild(ce_table5_3_name);
-
-                container.append(ce_table5_container, ce_table5_2_container,
-                    ce_table5_3_container);
+                document.getElementById("ce_input").value = "";
+                document.getElementById("ce_weight_input").value = "";
             }
 
             sum = 0;
@@ -476,7 +436,7 @@
                 sum += (table_data[i][2] * table_data[i][1]) / 100;
             }
             sum = Math.round(sum * 100)/100;
-            ce_percentage.innerHTML = `Percentage: ${sum}%`;
+            ce_header.innerHTML = `Percentage: ${sum}%`;
         });
     // No return value here, so the return value is "undefined" (without quotes).
 })(); // <-- Invoke function. The return value is passed back to executeScript
