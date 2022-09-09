@@ -20,9 +20,9 @@
       "scripting"
   ],
   "icons" : {
-      "16": "/images/Gradescope Logo16.png",
-      "32": "/images/Gradescope Logo32.png",
-      "48": "/images/Gradescope Logo48.png",
-      "128": "/images/Gradescope Logo128.png"
+      "16": "/images/ExtensionLogo16.png",
+      "32": "/images/ExtensionLogo32.png",
+      "48": "/images/ExtensionLogo48.png",
+      "128": "/images/ExtensionLogo128.png"
   }
 }
