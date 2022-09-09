@@ -1,6 +1,6 @@
 {
   "name": "Gradescope Calculator",
-  "description": "Calculates overall grade from individual scores on Gradescope",
+  "description": "Calculates overall grade from individual scores on Gradescope. This extension is not affiliated with Gradescope or its parent company in any way.",
   "version" :"0.0.1.1",
   "manifest_version": 3,
   "action" : {
